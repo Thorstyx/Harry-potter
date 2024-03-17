@@ -10,11 +10,13 @@ body{
 }
 
 .character_house{
-    color: #641e1e;
+    color: #c39a1c;
+    background-color: #641e1e;
 }
 
 .character_actor{
-    color: #641e1e;
+    color: #c39a1c;
+    background-color: #641e1e;
 }
 
 .character_image{
@@ -52,4 +54,9 @@ body{
 .no_house{
     background-image: url("images/no\ house.jpg");
     background-size: cover;
+}
+
+#back_button{
+    background-color: #641e1e;
+    color: #c39a1c; 
 }

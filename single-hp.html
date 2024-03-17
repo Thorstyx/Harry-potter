@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="single-style.css">
+</head>
+<body>
+
+    <div id="character"></div>
+    <script>
+        function fetchCharacter(){
+            let url = window.location.search
+            let slug = new URLSearchParams(url).get('slug')
+            return fetch("https://hp-api.lainocs.fr/characters/" + slug)
+                .then((response) => response.json())
+        }
+
+        async function displayCharacter(){
+            const data = await fetchCharacter()
+            document.querySelector('#character').innerHTML =`
+                <h1 class="character_name">${data.name}</h1>
+                <img src="${data.image}" alt="${data.name}" class="character_image">
+                <p class="character_house">${data.house}</p>
+                <p class="character_actor">${data.actor}</p> 
+                <a href="hp.html">Back<a>
+            `
+            if(data.house == "Gryffindor"){
+                document.querySelector("#character").classList.add("gryffondor")
+            }
+            else if(data.house == "Slytherin"){
+                document.querySelector("#character").classList.add("serpentard")
+            }
+            else if(data.house == "Hufflepuff"){
+                document.querySelector("#character").classList.add("poufsouffle")
+            }
+            else if(data.house == "Ravenclaw"){
+                document.querySelector("#character").classList.add("serdaigle")
+            }
+            else{
+                document.querySelector("#character").classList.add("no_house")
+            }
+        }
+
+        displayCharacter()
+    </script>
+</body>
+</html>

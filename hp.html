@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <h1>Personnages</h1>
+    </nav>
+
+
+    <div id="characters"></div>
+
+    <script>
+        function fetchCharacters(){
+            return fetch("https://hp-api.lainocs.fr/characters")
+            .then((response) => response.json())
+        }
+
+        async function displayCharacters(){
+            const data = await fetchCharacters()
+            data.forEach(character => {
+                document.querySelector('#characters').innerHTML += `
+                    <a href="single-hp.html?slug=${character.slug}">
+                        <div class="character">
+                            <h2 class="character_name">${character.name}</h2>
+                            <img src="${character.image}" alt="${character.name}"
+                        </div>
+                    <a>
+                `
+            });
+        }
+
+        displayCharacters()
+    </script>
+
+
+</body>
+</html>
